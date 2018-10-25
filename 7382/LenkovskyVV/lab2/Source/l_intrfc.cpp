@@ -91,6 +91,8 @@ namespace h_list
 //...........................
 	void read_s_expr (base prev, lisp& y)
 	{ //prev   － ранее прочитанный символ}
+		cout << "\tЧитаем символ: ";
+		cout << prev << endl;
 		if ( prev == ')' ) {cerr << " ! List.Error 1 " << endl; exit(1); } 
 		else if ( prev != '(' ) y = make_atom (prev);
 			 else read_seq (y);
