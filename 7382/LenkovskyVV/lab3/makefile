@@ -3,5 +3,6 @@ all: hello
 hello: main.o
 	g++ main.o
 
-main.o: ./Source/main.cpp ./Source/Queue.h ./Source/Stack.h
+main.o: ./Source/main.cpp
 	g++ -c ./Source/main.cpp
+

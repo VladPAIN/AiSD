@@ -4,8 +4,8 @@
 #include <locale.h>
 #include <string.h>
 #include <stdarg.h>
-#include "Stack.h"
-#include "Queue.h"
+#include "Stack.cpp"
+#include "Queue.cpp"
 using namespace std;
 
 void call_error(Queue & Q3, char symb, int numb) // функция показывающая место ошибки
@@ -32,35 +32,35 @@ void call_error(Queue & Q3, char symb, int numb) // функция показы�
 	cout << "\nПрограмма будет завершена." << endl;
 	exit(1);
 }
-bool bracket_c_f(char symb)  // проверка закрывающей скобки
+bool checkCloseBkt(char symb)  // проверка закрывающей скобки
 {
 	if (symb == ')')
 		return true;
 	else
 		return false;
 }
-bool bracket_o_f(char symb) // проверка открывающей скобки
+bool checkOpenBkt(char symb) // проверка открывающей скобки
 {
 	if (symb == '(')
 		return true;
 	else
 		return false;
 }
-bool sign_f(char symb)    // проерка является эллемент знаком
+bool checkSign(char symb)    // проерка является эллемент знаком
 {
 	if (symb == '+' || symb == '-')
 		return true;
 	else
 		return false;
 }
-bool name_f(char symb)      // проверка является ли элеммент именем
+bool checkSymb(char symb)      // проверка является ли элеммент именем
 {
 	if (symb == 'x' || symb == 'y' || symb == 'z')
 		return true;
 	else
 		return false;
 }
-bool is_it_f(Stack Q1, Queue & Q3)   // является ли строка формулой
+bool checkForm(Stack Q1, Queue & Q3)   // является ли строка формулой
 {
 	char symb;
 	bool name = true;
@@ -75,7 +75,7 @@ bool is_it_f(Stack Q1, Queue & Q3)   // является ли строка фо�
 		symb = Q1.pop();
 		cout << "Из стека извлечен элемент [" << symb << "] ";
 		is_el = false;
-		if (!is_el && name && name_f(symb))
+		if (!is_el && name && checkSymb(symb))
 		{
 			cout << ",который является именем. " << endl;
 			is_el = true;
@@ -85,7 +85,7 @@ bool is_it_f(Stack Q1, Queue & Q3)   // является ли строка фо�
 			bracket_o = false;
 			Q3.push(symb);
 		}
-		if (!is_el && sign && sign_f(symb))
+		if (!is_el && sign && checkSign(symb))
 		{
 			cout << ",который является знаком." << endl;
 			is_el = true;
@@ -95,7 +95,7 @@ bool is_it_f(Stack Q1, Queue & Q3)   // является ли строка фо�
 			bracket_o = true;
 			Q3.push(symb);
 		}
-		if (!is_el && bracket_o && bracket_o_f(symb))
+		if (!is_el && bracket_o && checkOpenBkt(symb))
 		{
 			cout << ",который является открывающей скобкой. " << endl;
 			is_el = true;
@@ -106,7 +106,7 @@ bool is_it_f(Stack Q1, Queue & Q3)   // является ли строка фо�
 			open++;
 			Q3.push(symb);
 		}
-		if (!is_el && bracket_c && bracket_c_f(symb))
+		if (!is_el && bracket_c && checkCloseBkt(symb))
 		{
 			close++;
 			cout << ",который является закрывающей скобкой." << endl;
@@ -134,14 +134,14 @@ bool is_it_f(Stack Q1, Queue & Q3)   // является ли строка фо�
 		call_error(Q3, symb, 2);
 	return true;
 }
-void print_f(Queue & Q3)      // вывести формулу
+void printForm(Queue & Q3)      // вывести формулу
 {
 	while (Q3.can_pop())
 	{
 		cout << Q3.pop() << " ";
 	}
 }
-void mainf(ifstream & fin, Stack & Q2)   // функция в которой проверятся условие является ли формулой
+void checkCondition(ifstream & fin, Stack & Q2)   // функция в которой проверятся условие является ли формулой
 {
 	Queue Q3;
 	int n = 1;
@@ -162,12 +162,12 @@ void mainf(ifstream & fin, Stack & Q2)   // функция в которой п�
 		Q1.push(a);
 	}
 	cout << "Считанная из файла строка.";
-	print_f(Q3);
+	printForm(Q3);
 	cout << endl;
-	bool f = is_it_f(Q1, Q3);
+	bool f = checkForm(Q1, Q3);
 	cout << "Это формула." << endl;
 	cout << "Ее вид: " << endl;
-	print_f(Q3);
+	printForm(Q3);
 }
 int main(int argc, char **argv)
 {
@@ -184,7 +184,7 @@ int main(int argc, char **argv)
 	{
 		ifstream fin(x);
 		Stack Q2;
-		mainf(fin, Q2);
+		checkCondition(fin, Q2);
 		fin.close();
 	}
 	else
