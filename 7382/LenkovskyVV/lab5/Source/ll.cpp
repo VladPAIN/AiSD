@@ -1,4 +1,4 @@
-#ifdef _WIN32
+#ifdef _WIN64
 #define _CRT_SECURE_NO_DEPRECATE
 #define NL "\r\n"
 #else
