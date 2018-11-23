@@ -1,10 +1,3 @@
-#ifdef _WIN64
-#define _CRT_SECURE_NO_DEPRECATE
-#define NL "\r\n"
-#else
-#define NL "\n"
-#endif
-
 #include <string>
 #include <cstring>
 #include <vector>
@@ -83,25 +76,25 @@ public:
 
     //  Outputing ptable and codes
     //
-    printf( "%i"NL, tsize );
-    fprintf( outputFile, "%i"NL, tsize );
+    printf( "%i\n", tsize );
+    fprintf( outputFile, "%i\n", tsize );
     for( i=0; i<tsize; i++ )
     {
-      printf("%c\t%f\t%s"NL, ptable[i].ch, ptable[i].p, codes[ptable[i].ch].c_str() );
-      fprintf(outputFile, "%c\t%f\t%s"NL, ptable[i].ch, ptable[i].p, codes[ptable[i].ch].c_str() );
+      printf("%c\t%f\t%s\n", ptable[i].ch, ptable[i].p, codes[ptable[i].ch].c_str() );
+      fprintf(outputFile, "%c\t%f\t%s\n", ptable[i].ch, ptable[i].p, codes[ptable[i].ch].c_str() );
     }
 
     //  Outputing encoded text
     //
     fseek( inputFile, SEEK_SET, 0 );
-    printf(NL);
-    fprintf(outputFile, NL);
+    printf("\n");
+    fprintf(outputFile, "\n");
     while( fscanf( inputFile, "%c", &ch ) != EOF )
     {
       printf("%s", codes[ch].c_str());
       fprintf(outputFile, "%s", codes[ch].c_str());
     }
-    printf(NL);
+    printf("\n");
 
     //  Cleaning
     //
@@ -160,7 +153,7 @@ while((ch = fgetc(inputFile)) != EOF)
 	  fprintf( outputFile, "%c", (*ci).first );
         }
     }
-    printf(NL);
+    printf("\n");
 
     //  Cleaning
     //
@@ -226,12 +219,12 @@ private:
 };
 
 int show_usage() {
-  printf(NL);
-  printf("Examples:"NL);
-  printf("  shannon input.txt"NL);
-  printf("  shannon input.txt encoded.txt"NL);
-  printf("  shannon -d encoded.txt"NL);
-  printf(NL);
+  printf("\n");
+  printf("Examples:\n");
+  printf("  shannon input.txt\n");
+  printf("  shannon input.txt encoded.txt\n");
+  printf("  shannon -d encoded.txt\n");
+  printf("\n");
   exit(0);
 }
 
@@ -242,7 +235,7 @@ int main(int argc, char **argv)
   char inputFilename[128];
   char outputFilename[128];
 
-  printf(NL);
+  printf("\n");
 
   if(i == argc) show_usage();
 
@@ -279,7 +272,7 @@ int main(int argc, char **argv)
   }
   delete coder;
 
-  printf(NL);
+  printf("\n");
 
   return 0;
 }
