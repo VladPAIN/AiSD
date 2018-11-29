@@ -128,7 +128,9 @@ fscanf( inputFile, "%i", &tsize );
       fscanf( inputFile, "%f %s", &p, code );
       codes[ch] = code;
       fgetc(inputFile); // skip end line
-      printf("\t\t\tСейчас работаем с символом - [%c\n", ch);
+      printf("\tШаг рекурсии №  %d\n", step);
+      step++;
+      printf("\t\tСейчас работаем с символом - %c\n", ch);
     }
     fgetc(inputFile); // skip end line
 
