@@ -130,7 +130,7 @@ fscanf( inputFile, "%i", &tsize );
       fgetc(inputFile); // skip end line
       printf("\tШаг рекурсии №  %d\n", step);
       step++;
-      printf("\t\tСейчас работаем с символом - %c\n", ch);
+      printf("\t\tСчитываем элемент - %c и его код - %s\n", ch, code);
     }
     fgetc(inputFile); // skip end line
 
